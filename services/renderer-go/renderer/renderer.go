@@ -16,7 +16,7 @@ func Render(ctx context.Context, src string) (string, error) {
 	)
 	var buf bytes.Buffer
 	if err := md.Convert(source, &buf); err != nil {
-		panic(err)
+		return "", err
 	}
 	html := buf.String()
 	return html, nil
