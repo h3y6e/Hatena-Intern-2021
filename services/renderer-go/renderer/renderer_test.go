@@ -49,3 +49,21 @@ func Test_Render_link(t *testing.T) {
 	assert.Equal(t, `<p>foo <a href="https://google.com/">https://google.com/</a> bar</p>
 `, html)
 }
+
+func Test_Render_mathjax(t *testing.T) {
+	src := `$$
+\mathbb{E}(X) = \int x d F(x) = \left\{ \begin{aligned} \sum_x x f(x) \; & \text{ if } X \text{ is discrete} 
+\\ \int x f(x) dx \; & \text{ if } X \text{ is continuous }
+\end{aligned} \right.
+$$
+	
+Inline math $\frac{1}{2}$`
+	html, err := Render(context.Background(), src)
+	assert.NoError(t, err)
+	assert.Equal(t, `<p><span class="math display">\[\mathbb{E}(X) = \int x d F(x) = \left\{ \begin{aligned} \sum_x x f(x) \; & \text{ if } X \text{ is discrete} 
+\\ \int x f(x) dx \; & \text{ if } X \text{ is continuous }
+\end{aligned} \right.
+\]</span></p>
+<p>Inline math <span class="math inline">\(\frac{1}{2}\)</span></p>
+`, html)
+}
