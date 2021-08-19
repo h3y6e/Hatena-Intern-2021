@@ -58,6 +58,7 @@ cp -r ./go/renderer ../services/renderer-go/pb
 cp -r ./ts/renderer ../services/renderer-ts/pb
 cp -r ./go/renderer ../services/blog/pb
 cp -r ./go/fetcher ../services/fetcher/pb
+cp -r ./go/fetcher ../services/renderer-go/pb
 
 mkdir -p ts/health-check
 docker run -v "$(pwd):/pb" -w /pb --rm hatena-intern-2021-protoc-ts \

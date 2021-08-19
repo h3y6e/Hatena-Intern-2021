@@ -17,13 +17,13 @@ import (
 	"github.com/hatena/Hatena-Intern-2021/services/fetcher/config"
 	server "github.com/hatena/Hatena-Intern-2021/services/fetcher/grpc"
 	"github.com/hatena/Hatena-Intern-2021/services/fetcher/log"
+	pb "github.com/hatena/Hatena-Intern-2021/services/fetcher/pb/fetcher"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
 func main() {
-	fmt.Println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Fetcher!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	if err := run(os.Args); err != nil {
 		fmt.Fprintf(os.Stderr, "%+v\n", err)
 		os.Exit(1)
@@ -66,6 +66,7 @@ func run(args []string) error {
 		)),
 	)
 	svr := server.NewServer()
+	pb.RegisterFetcherServer(s, svr)
 	healthpb.RegisterHealthServer(s, svr)
 	go stop(s, conf.GracefulStopTimeout, logger)
 	if err := s.Serve(lis); err != nil {
