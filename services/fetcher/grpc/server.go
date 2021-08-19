@@ -3,8 +3,8 @@ package grpc
 import (
 	"context"
 
-	"github.com/hatena/Hatena-Intern-2021/services/fetcher/fetcher"
 	pb "github.com/hatena/Hatena-Intern-2021/services/fetcher/pb/fetcher"
+	fetcher "github.com/hatena/Hatena-Intern-2021/services/fetcher/src"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 

@@ -10,8 +10,8 @@ import (
 
 func Test_Server_Fetch(t *testing.T) {
 	s := NewServer()
-	link := `https://google.com/`
+	link := "https://hatenacorp.jp/recruit/intern/2021"
 	reply, err := s.Fetch(context.Background(), &pb.FetchRequest{Link: link})
 	assert.NoError(t, err)
-	assert.Equal(t, "title", reply.Title)
+	assert.Equal(t, "はてなリモートインターンシップ2021 - 株式会社はてな", reply.Title)
 }

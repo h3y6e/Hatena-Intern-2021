@@ -8,8 +8,8 @@ import (
 )
 
 func Test_Fetch(t *testing.T) {
-	link := "https://google.com/"
+	link := "https://hatenacorp.jp/recruit/intern/2021"
 	title, err := Fetch(context.Background(), link)
 	assert.NoError(t, err)
-	assert.Equal(t, "title", title)
+	assert.Equal(t, "はてなリモートインターンシップ2021 - 株式会社はてな", title)
 }
