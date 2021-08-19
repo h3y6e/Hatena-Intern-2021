@@ -12,9 +12,6 @@ configMapGenerator:
   literals:
   - MODE=development
   - DATABASE_DSN=root@(account-db:3306)/intern_2021_account?time_zone=UTC&parseTime=true&loc=UTC
-- name: account-test-env-vars
-  literals:
-  - TEST_DATABASE_DSN=root@(account-db:3306)/intern_2021_account_test?time_zone=UTC&parseTime=true&loc=UTC
 - name: account-db-schema-config
   files:
   - config/schema.sql
