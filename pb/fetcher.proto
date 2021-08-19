@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/hatena/Hatena-Intern-2021/pb/go/fetcher"; // fake
+package fetcher;
+
+service Fetcher {
+  rpc Fetcher(FetchRequest) returns (FetchReply);
+}
+
+message FetchRequest {
+  string link = 1;
+}
+
+message FetchReply {
+  string title = 1;
+}
