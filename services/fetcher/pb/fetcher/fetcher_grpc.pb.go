@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FetcherClient interface {
-	Fetcher(ctx context.Context, in *FetcherRequest, opts ...grpc.CallOption) (*FetcherReply, error)
+	Fetcher(ctx context.Context, in *FetchRequest, opts ...grpc.CallOption) (*FetchReply, error)
 }
 
 type fetcherClient struct {
@@ -29,8 +29,8 @@ func NewFetcherClient(cc grpc.ClientConnInterface) FetcherClient {
 	return &fetcherClient{cc}
 }
 
-func (c *fetcherClient) Fetcher(ctx context.Context, in *FetcherRequest, opts ...grpc.CallOption) (*FetcherReply, error) {
-	out := new(FetcherReply)
+func (c *fetcherClient) Fetcher(ctx context.Context, in *FetchRequest, opts ...grpc.CallOption) (*FetchReply, error) {
+	out := new(FetchReply)
 	err := c.cc.Invoke(ctx, "/fetcher.Fetcher/Fetcher", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func (c *fetcherClient) Fetcher(ctx context.Context, in *FetcherRequest, opts ..
 // All implementations must embed UnimplementedFetcherServer
 // for forward compatibility
 type FetcherServer interface {
-	Fetcher(context.Context, *FetcherRequest) (*FetcherReply, error)
+	Fetcher(context.Context, *FetchRequest) (*FetchReply, error)
 	mustEmbedUnimplementedFetcherServer()
 }
 
@@ -50,7 +50,7 @@ type FetcherServer interface {
 type UnimplementedFetcherServer struct {
 }
 
-func (UnimplementedFetcherServer) Fetcher(context.Context, *FetcherRequest) (*FetcherReply, error) {
+func (UnimplementedFetcherServer) Fetcher(context.Context, *FetchRequest) (*FetchReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Fetcher not implemented")
 }
 func (UnimplementedFetcherServer) mustEmbedUnimplementedFetcherServer() {}
@@ -67,7 +67,7 @@ func RegisterFetcherServer(s grpc.ServiceRegistrar, srv FetcherServer) {
 }
 
 func _Fetcher_Fetcher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetcherRequest)
+	in := new(FetchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func _Fetcher_Fetcher_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/fetcher.Fetcher/Fetcher",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FetcherServer).Fetcher(ctx, req.(*FetcherRequest))
+		return srv.(FetcherServer).Fetcher(ctx, req.(*FetchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
